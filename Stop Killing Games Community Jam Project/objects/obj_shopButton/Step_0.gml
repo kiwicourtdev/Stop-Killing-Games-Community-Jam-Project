@@ -25,7 +25,8 @@ if type = 2 || global.upgrades[type] != 6{
 				case 1: //speed upgrade
 					global.maxSpd += global.upgradeAmounts[type,global.upgrades[type]];
 					global.spdAccel += global.upgradeAmounts[type,global.upgrades[type]]/150;
-					global.angAccel += global.upgradeAmounts[type,global.upgrades[type]]/40;
+					global.angAccel += global.upgradeAmounts[type,global.upgrades[type]]/20;
+					global.maxAng += global.upgradeAmounts[type,global.upgrades[type]]/2;
 				break;
 			};
 		

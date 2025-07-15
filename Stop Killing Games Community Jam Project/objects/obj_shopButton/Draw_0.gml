@@ -3,7 +3,7 @@ if type = 2 || global.upgrades[type] != 6{
 
 	//-----increment progress
 
-	if instance_place(x,y,obj_player) && obj_player.speed = 0 && progress < progressMax && alarm[0] = -1
+	if instance_place(x,y,obj_player) && /*obj_player.speed = 0 &&*/ progress < progressMax && alarm[0] = -1
 	progress++;
 	else if progress > 0
 	progress--;
