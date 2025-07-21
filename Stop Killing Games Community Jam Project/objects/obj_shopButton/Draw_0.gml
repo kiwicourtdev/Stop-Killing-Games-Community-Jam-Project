@@ -1,4 +1,4 @@
-if type = 2 || global.upgrades[type] != 6{
+if type = 2 || global.upgrades != array_length(global.upgradeAmounts){
 	//----------draw progressing box
 
 	//-----increment progress
@@ -10,7 +10,7 @@ if type = 2 || global.upgrades[type] != 6{
 
 	//-----draw box
 
-	draw_sprite(sprite_index, 0, x, y);
+	draw_sprite_ext(sprite_index, 0, x, y, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
 
 	var c = c_white
 	
@@ -24,26 +24,19 @@ if type = 2 || global.upgrades[type] != 6{
 	if type != 2{
 		draw_set_halign(fa_middle);
 		draw_set_font(ft_shop);
-		cost = global.upgradeCosts[type, global.upgrades[type]];
-		draw_text(x-12,y-12,string(cost));
+		cost = global.upgradeCosts[global.upgrades];
+		draw_text(x-6,y-8,string(cost));
+		draw_sprite(spr_material,0,x-18,y-6);
 	};
 
 	//graphic
 	var spr = spr_time;
 
-	switch(type){
-		case 0: //time upgrade
-		
-		break;
+	if global.upgrades % 2 = 1
+	spr = spr_spd;
 	
-		case 1: //speed upgrade
-			spr = spr_spd;
-		break;
-	
-		case 2: //continue button
-			spr = spr_cont;
-		break;
-	};
+	if type = 2
+	spr = spr_cont;
 
 	draw_sprite(spr,0,x-20,y);
 };

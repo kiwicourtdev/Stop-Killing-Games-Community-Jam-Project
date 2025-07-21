@@ -1,5 +1,5 @@
 //----------finish behavior
-if type = 2 || global.upgrades[type] != 6{
+if type = 2 || global.upgrades != array_length(global.upgradeAmounts){
 	if progress = progressMax{
 	
 		//reset timer and start cooldown
@@ -11,32 +11,30 @@ if type = 2 || global.upgrades[type] != 6{
 	
 		//continue button
 		if type = 2{
+			global.dead = false;
 			room_goto(rm_level);
 			exit;
-		};
-	
-		//others
-		if global.materials >= global.upgradeCosts[type,global.upgrades[type]]{
-			switch(type){
-				case 0: //time upgrade
-					global.timerMax += global.upgradeAmounts[type,global.upgrades[type]];
-				break;
-	
-				case 1: //speed upgrade
-					global.maxSpd += global.upgradeAmounts[type,global.upgrades[type]];
-					global.spdAccel += global.upgradeAmounts[type,global.upgrades[type]]/150;
-					global.angAccel += global.upgradeAmounts[type,global.upgrades[type]]/20;
-					global.maxAng += global.upgradeAmounts[type,global.upgrades[type]]/2;
-				break;
+		}else{//others
+			if global.materials >= global.upgradeCosts[global.upgrades]{
+				if global.upgrades % 2 = 0{//time upgrade
+					global.timerMax += global.upgradeAmounts[global.upgrades];
+				}else{//speed upgrade
+					global.maxSpd += global.upgradeAmounts[global.upgrades];
+					global.spdAccel += global.upgradeAmounts[global.upgrades]/150;
+					global.angAccel += global.upgradeAmounts[global.upgrades]/20;
+					global.maxAng += global.upgradeAmounts[global.upgrades]/2;
+				};
+		
+				//increase upgrade amount and remove materials
+		
+				global.materials -= global.upgradeCosts[global.upgrades];
+		
+				global.upgrades++;
+		
+			}else{//failed upgrade
+				alarm[1] = 20;
+				image_blend = c_red;
 			};
-		
-			//increase upgrade amount and remove materials
-		
-			global.materials -= global.upgradeCosts[type,global.upgrades[type]];
-		
-			global.upgrades[type]++;
-		
 		};
-
 	};
 };

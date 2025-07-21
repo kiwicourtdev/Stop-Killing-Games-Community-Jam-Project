@@ -42,11 +42,38 @@ spdVel -= global.spdAccel * sign(spdVel) / 2;
 
 //apply
 speed = spdVel;
+xSpd = hspeed;
+ySpd = vspeed;
 
 //correction
 x = clamp(x, 16, room_width - 16);
 y = clamp(y, 16, room_height - 16);
 
 //force stop
-if global.keySpace
+if global.keySpace || global.dead{
+	xSpd = 0;
+	ySpd = 0;
+};
+
+//wall slide
+
+var wall = collision_circle(x,y,10,obj_wall,true,true);
+
+if wall != noone{
+	//draw = true;
+	if instance_place(x+xSpd,y,obj_wall) = noone{
+		xSpd = 0;
+		x += .1*sign(x-wall.x);
+	};
+	if instance_place(x,y+ySpd,obj_wall) = noone{
+		ySpd = 0;
+		y += .1*sign(y-wall.y);
+	};
+}else{
+	//draw = false;
+};
+
+//move
 speed = 0;
+x += xSpd;
+y += ySpd;

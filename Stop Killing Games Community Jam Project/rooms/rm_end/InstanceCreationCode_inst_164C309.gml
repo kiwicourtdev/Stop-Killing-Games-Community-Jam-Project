@@ -1,0 +1,1 @@
+txt = "You have\nsuccessfully\nescaped.\n\nThank you\nfor playing!";

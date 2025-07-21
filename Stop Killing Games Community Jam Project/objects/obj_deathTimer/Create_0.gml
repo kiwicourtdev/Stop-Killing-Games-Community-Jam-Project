@@ -1,4 +1,4 @@
 //----------setup
 
 //-----variables
-timer = 0;
+global.timer = 0;

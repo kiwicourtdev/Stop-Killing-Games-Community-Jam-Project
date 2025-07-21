@@ -4,6 +4,7 @@
 
 //set window size to be larger despite the 128x128 camera
 window_set_size(640,640);
+window_set_position(display_get_width()/2-320,display_get_height()/2-320);
 
 //-----upgrade variables
 
@@ -14,19 +15,15 @@ global.angAccel = .1;
 
 global.timerMax = 120;
 
-global.upgrades = [0, 0];
+global.upgrades = 0;
 
-global.upgradeCosts = [
-[1, 2, 4, 8, 16, 32],
-[2, 4, 6, 8, 10, 12]
-];
+global.upgradeCosts = [1, 2, 2, 4, 4, 6, 8, 8, 10, 12];
 
-global.upgradeAmounts = [
-[60, 120, 300, 600, 1200, 2400],
-[.5, .5, .5, .5, .5, .5]
-];
+global.upgradeAmounts = [60, .5, 120, .5, 300, .5, 600, .5, 1200, .5];
 
 global.materials = 0;
 
-//-----material destroy setup
+//-----level setup
 global.destroyList = ds_list_create();
+
+global.dead = false;
